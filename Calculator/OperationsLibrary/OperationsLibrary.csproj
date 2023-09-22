@@ -76,7 +76,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OperationLibraryExceptions.resx</DependentUpon>
     </Compile>
-    <Compile Include="OldOperator.cs" />
+    <Compile Include="PredefinedOperator.cs" />
     <Compile Include="Operator.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Divide.cs" />
@@ -88,7 +88,6 @@
     <Compile Include="Reciprocal.cs" />
     <Compile Include="SquareRoot.cs" />
     <Compile Include="Subtract.cs" />
-    <Compile Include="TestClass.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="TokenDictionary.cs" />
     <Compile Include="UnaryOperation.cs" />

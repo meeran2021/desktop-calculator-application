@@ -4,40 +4,68 @@ using System.IO;
 using System.Linq;
 using System.Resources;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Contexts;
 using System.Text.Json;
 
 namespace OperationsLibrary
 {
-    public class Parser : OldOperator
+    public class Parser : PredefinedOperator
     {
-        //private Dictionary<string, TokenType> _parsingTable = new Dictionary<string, TokenType>
-        //{
-        //    { "+" , TokenType.Operator },
-        //    { "-" , TokenType.Operator },
-        //    { "*" , TokenType.Operator },
-        //    { "/" , TokenType.Operator },
-        //    { "%" , TokenType.Operator },
-        //    { "(" , TokenType.Delimiter },
-        //    { ")" , TokenType.Delimiter }
-        //};
+        public List<Operator> OperatorList = new List<Operator>();
+        public List<Token> TokenList = new List<Token>();
 
-        
-       
+
         public bool IsOperatorPrecedenceHigher(string operator1, string operator2)
         {
             return GetOperatorPrecedence(operator1) > GetOperatorPrecedence(operator2);
         }
 
+
+        public void DeserializeOperatorJson(string jsonText)
+        {
+            // Parse the JSON document
+            JsonDocument ParsedJsonDocument = JsonDocument.Parse(jsonText);
+
+            // Get the root element
+            JsonElement Root = ParsedJsonDocument.RootElement;
+
+            // Extract the "Operator" array from the JSON data
+            JsonElement OperatorArray = Root.GetProperty("Operator");
+
+            // Create a list of Operator objects
+            //List<Operator>;
+            OperatorList = new List<Operator>();
+
+            foreach (JsonElement OperatorItem in OperatorArray.EnumerateArray())
+            {
+                OperatorList.Add(new Operator
+                {
+                    Symbol = OperatorItem.GetProperty("Symbol").GetString(),
+                    Name = OperatorItem.GetProperty("Name").GetString(),
+                    Precedence = OperatorItem.GetProperty("Precedence").GetString()
+                });
+            }
+
+            //return OperatorList;
+        }
+
+
         public List<Token> Tokenize(string expression)
         {
-            string Path = "E:\\Visual Studio\\GrapeCity\\Assignment\\Calculator\\OperationsLibrary\\OperatorDatabase.json";
+            string Path = "E:\\Visual Studio\\Project\\Calculator\\OperationsLibrary\\OperatorDatabase.json";
             string JsonText = File.ReadAllText(Path);
 
-            List<Operator> OperatorList = JsonSerializer.Deserialize<List<Operator>>(JsonText);
-            Dictionary<string, Operator> OperatorDictionary = OperatorList.ToDictionary(OperatorInstance => OperatorInstance.Symbol, OperatorInstance => OperatorInstance);
+
+            //List<Operator>;
+            //OperatorList = 
+            DeserializeOperatorJson(JsonText);
+            //List<Operator> OperatorList = JsonSerializer.Deserialize<List<Operator>>(JsonText);
+            Dictionary<string, Operator> OperatorDictionary = OperatorList.ToDictionary(
+                OperatorInstance => OperatorInstance.Symbol, 
+                OperatorInstance => OperatorInstance);
 
 
-            List<Token> TokenList = new List<Token>();
+            //List<Token> TokenList = new List<Token>();
 
 
             int LengthOfExpression = expression.Length;
@@ -58,18 +86,23 @@ namespace OperationsLibrary
                     ExpresionIndex--; 
                     TokenList.Add(new Token(TokenType.Operator, Token));
                 }
+
                 //else if(_parsingTable.Any(entry => entry.Key == ExpressionCurrentChar.ToString() && 
                 //        entry.Value == TokenType.Operator)) 
                 else if(OperatorDictionary.ContainsKey(ExpressionCurrentChar.ToString()) )
                 {
-                    Operator FetchedOperator = OperatorDictionary[ExpressionCurrentChar.ToString()];
-                    if(FetchedOperator.Symbol == TokenType.Operator.ToString())
-                    {
-                        Token = ExpressionCurrentChar.ToString();
-                        TokenList.Add(new Token(TokenType.Operator, Token));
-                    }
+                    Token = ExpressionCurrentChar.ToString();
+                    TokenList.Add(new Token(TokenType.Operator, Token));
+                    //Operator FetchedOperator = OperatorDictionary[ExpressionCurrentChar.ToString()];
+                    //if(FetchedOperator.Symbol == TokenType.Operator.ToString())
+                    //{
+                    //    Token = ExpressionCurrentChar.ToString();
+                    //    TokenList.Add(new Token(TokenType.Operator, Token));
+                    //}
                 }
+
                 //For Numbers Including Multiple Digits
+                // Handle decimal numbers required
                 else if (char.IsDigit(ExpressionCurrentChar))
                 {
                     while (ExpresionIndex < LengthOfExpression && char.IsDigit(expression[ExpresionIndex]))
@@ -78,7 +111,7 @@ namespace OperationsLibrary
                         ExpresionIndex++;
                     }
                     ExpresionIndex--;
-                    TokenList.Add(new Token(TokenType.Operator, Token));
+                    TokenList.Add(new Token(TokenType.Operand, Token));
                 }
 
                 else if (ExpressionCurrentChar == '(' || ExpressionCurrentChar == ')')

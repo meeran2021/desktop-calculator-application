@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OperationsLibrary
 {
-    public class OldOperator 
+    public class PredefinedOperator 
     {
         private Dictionary<string, IOperations> _operatorDictionary = new Dictionary<string, IOperations>();
 

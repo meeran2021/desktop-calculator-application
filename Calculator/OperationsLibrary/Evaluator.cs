@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OperationsLibrary
 {
-    public class Evaluator : OldOperator
+    public class Evaluator : PredefinedOperator
     {
         //private string _expression;
 

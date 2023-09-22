@@ -9,7 +9,7 @@ namespace TestOperationLibraries
         public void TestTokenize()
         {
             //Arrange
-            Parser ParserInstance = new Parser();
+            Parser ParserInstance = new();
             //string Path = "E:\\Visual Studio\\GrapeCity\\Assignment\\Calculator\\OperationsLibrary\\OperatorDatabase.json";
             //string JsonText = File.ReadAllText(Path);
 

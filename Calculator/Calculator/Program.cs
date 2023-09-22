@@ -25,11 +25,14 @@ namespace Calculator
             //OperationsLibrary.Evaluator evaluate = new OperationsLibrary.Evaluator();
             //Console.WriteLine(evaluate.Solve("2+3+4+5"));
 
-            //Parser ParserInstance = new Parser();
+            Parser ParserInstance = new Parser();
 
-            //List<Token> ExpressionToken = ParserInstance.Tokenize("3 + 4 * 2 - 1");
+            List<Token> ExpressionToken = ParserInstance.Tokenize("3+4*(2-1) + Sin ( 30 )");
+            Console.WriteLine("Length of ExpressionToken: " + ExpressionToken.Count);
 
-            //Console.WriteLine("Length of ExpressionToken: " + ExpressionToken.Count);
+            List<Token> PostfixExpression = ParserInstance.ConvertToPostfix(ExpressionToken);
+            Console.WriteLine("Length of Postfix Expression: " + PostfixExpression.Count);
+
             //foreach (Token TokenUnit in ExpressionToken)
             //{
             //    Console.WriteLine("Token: " + TokenUnit.ToString());
