@@ -1,0 +1,47 @@
+{
+    "exclude": [
+        "**/bin",
+        "**/bower_components",
+        "**/jspm_packages",
+        "**/node_modules",
+        "**/obj",
+        "**/platforms"
+    ],
+    "Operator": [
+        {
+            "Symbol": "+",
+            "Name": "Add",
+            "Precedence": "4"
+        },
+        {
+            "Symbol": "-",
+            "Name": "Subtract",
+            "Precedence": "4"
+        },
+        {
+            "Symbol": "/",
+            "Name": "Divide",
+            "Precedence": "3"
+        },
+        {
+            "Symbol": "*",
+            "Name": "Multiply",
+            "Precedence": "3"
+        },
+        {
+            "Symbol": "%",
+            "Name": "Modulus",
+            "Precedence": "3"
+        },
+        {
+            "Symbol": "~",
+            "Name": "Reciprocal",
+            "Precedence": "2"
+        },
+        {
+            "Symbol": "Sqrt",
+            "Name": "SquareRoot",
+            "Precedence": "2"
+        }
+    ]
+}
