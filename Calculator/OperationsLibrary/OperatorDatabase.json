@@ -1,47 +1,54 @@
 {
-    "exclude": [
-        "**/bin",
-        "**/bower_components",
-        "**/jspm_packages",
-        "**/node_modules",
-        "**/obj",
-        "**/platforms"
-    ],
-    "Operator": [
-        {
-            "Symbol": "+",
-            "Name": "Add",
-            "Precedence": "4"
-        },
-        {
-            "Symbol": "-",
-            "Name": "Subtract",
-            "Precedence": "4"
-        },
-        {
-            "Symbol": "/",
-            "Name": "Divide",
-            "Precedence": "3"
-        },
-        {
-            "Symbol": "*",
-            "Name": "Multiply",
-            "Precedence": "3"
-        },
-        {
-            "Symbol": "%",
-            "Name": "Modulus",
-            "Precedence": "3"
-        },
-        {
-            "Symbol": "~",
-            "Name": "Reciprocal",
-            "Precedence": "2"
-        },
-        {
-            "Symbol": "Sqrt",
-            "Name": "SquareRoot",
-            "Precedence": "2"
-        }
-    ]
+  "exclude": [
+    "**/bin",
+    "**/bower_components",
+    "**/jspm_packages",
+    "**/node_modules",
+    "**/obj",
+    "**/platforms"
+  ],
+  "Operator": [
+    {
+      "ClassName": "OperationsLibrary.Add",
+      "Symbol": "+",
+      "Name": "Add",
+      "Precedence": "4"
+    },
+    {
+      "ClassName": "OperationsLibrary.Subtract",
+      "Symbol": "-",
+      "Name": "Subtract",
+      "Precedence": "4"
+    },
+    {
+      "ClassName": "OperationsLibrary.Divide",
+      "Symbol": "/",
+      "Name": "Divide",
+      "Precedence": "3"
+    },
+    {
+      "ClassName": "OperationsLibrary.Multiply",
+      "Symbol": "*",
+      "Name": "Multiply",
+      "Precedence": "3"
+    },
+    {
+      "ClassName": "OperationsLibrary.Modulus",
+      "Symbol": "%",
+      "Name": "Modulus",
+      "Precedence": "3"
+    },
+    {
+      "ClassName": "OperationsLibrary.Reciprocal",
+      "Symbol": "~",
+      "Name": "Reciprocal",
+      "Precedence": "2"
+    },
+    {
+      "ClassName": "OperationsLibrary.SquareRoot",
+      "Symbol": "Sqrt",
+      "Name": "SquareRoot",
+      "Precedence": "2"
+    }
+  ]
 }

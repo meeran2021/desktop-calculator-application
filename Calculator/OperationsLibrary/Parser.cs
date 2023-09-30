@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,12 +7,13 @@ using System.Resources;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Contexts;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace OperationsLibrary
 {
     public class Parser : PredefinedOperator
     {
-        public List<Operator> OperatorList = new List<Operator>();
+        public List<OperatorItem> OperatorList;// = new List<Operator>();
         public List<Token> TokenList = new List<Token>();
 
 
@@ -34,11 +36,11 @@ namespace OperationsLibrary
 
             // Create a list of Operator objects
             //List<Operator>;
-            OperatorList = new List<Operator>();
+            OperatorList = new List<OperatorItem>();
 
             foreach (JsonElement OperatorItem in OperatorArray.EnumerateArray())
             {
-                OperatorList.Add(new Operator
+                OperatorList.Add(new OperatorItem
                 {
                     Symbol = OperatorItem.GetProperty("Symbol").GetString(),
                     Name = OperatorItem.GetProperty("Name").GetString(),
@@ -58,12 +60,18 @@ namespace OperationsLibrary
 
             //List<Operator>;
             //OperatorList = 
-            DeserializeOperatorJson(JsonText);
-            //List<Operator> OperatorList = JsonSerializer.Deserialize<List<Operator>>(JsonText);
-            Dictionary<string, Operator> OperatorDictionary = OperatorList.ToDictionary(
+            //DeserializeOperatorJson(JsonText);
+            //List<Operator>
+            //OperatorList = JsonSerializer.Deserialize<List<Operator>>(JsonText);
+
+            //OperatorList = JsonConvert.DeserializeObject<List<OperatorItem>>(JsonText);
+
+            JsonObject root = JsonConvert.DeserializeObject<JsonObject>(JsonText);
+
+
+            Dictionary<string, OperatorItem> OperatorDictionary = root.Operator.ToDictionary(
                 OperatorInstance => OperatorInstance.Symbol, 
                 OperatorInstance => OperatorInstance);
-
 
             //List<Token> TokenList = new List<Token>();
 

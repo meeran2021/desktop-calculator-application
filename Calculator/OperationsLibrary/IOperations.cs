@@ -9,7 +9,7 @@ namespace OperationsLibrary
     public interface IOperations
     {
         int OperandCount { get; }
-        int OperatorPrecedence { get; set; }
+        int OperatorPrecedence { get; }
 
         double Evaluate(double[] operands);
     }

@@ -10,17 +10,9 @@ namespace OperationsLibrary
 {
     public abstract class BinaryOperation : IOperations
     {
-        private int _operandCount = 2;
+        public int OperandCount => 2;
 
-        public int OperandCount
-        {
-            get
-            {
-                return this._operandCount;
-            }
-        }
-
-        public int OperatorPrecedence { get; set; }
+        public abstract int OperatorPrecedence { get; }
 
         protected abstract double EvaluateBinary(double operand1, double operand2);
 
@@ -28,7 +20,7 @@ namespace OperationsLibrary
         {
             // validation
 
-            if (operands.Length != _operandCount)
+            if (operands.Length != OperandCount)
             {
                 ResourceManager RmInstance = new ResourceManager("Resources", typeof(BinaryOperation).Assembly);
                 throw new ArgumentException(RmInstance.GetString("OperandException"));

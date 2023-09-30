@@ -9,25 +9,7 @@ namespace OperationsLibrary
 {
     public class Subtract : BinaryOperation  
     {
-        private int _operatorPrecedence = 1;
-
-        public new int OperatorPrecedence
-        {
-            get
-            {
-                return this._operatorPrecedence;
-            }
-            set
-            {
-                if (value <= 0)
-                {
-                    ResourceManager RmInstance = new ResourceManager("Resources", typeof(Subtract).Assembly);
-                    throw new ArgumentOutOfRangeException("value", RmInstance.GetString("PrecedenceValueException"));
-                }
-                else
-                    _operatorPrecedence = value;
-            }
-        }
+        public override int OperatorPrecedence => 1;
 
         protected override double EvaluateBinary(double operand1, double operand2)
         {

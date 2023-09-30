@@ -9,16 +9,8 @@ namespace OperationsLibrary
 {
     public abstract class UnaryOperation : IOperations
     {
-        private int _operandCount => 1;
-        public int OperandCount
-        {
-            get
-            {
-                return this._operandCount;
-            }
-        }
-
-        public int OperatorPrecedence { get; set; }
+        public int OperandCount => 1;
+        public abstract int OperatorPrecedence { get; }
 
         protected abstract double EvaluateUnary(double operand);
 
@@ -26,7 +18,7 @@ namespace OperationsLibrary
         {
             // validation
 
-            if (operands.Length != _operandCount)
+            if (operands.Length != OperandCount)
             {
                 ResourceManager rm = new ResourceManager("Resources", typeof(UnaryOperation).Assembly);
                 throw new ArgumentException(rm.GetString("OperandException"));

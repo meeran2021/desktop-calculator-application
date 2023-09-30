@@ -54,3 +54,5 @@ E:\Visual Studio\Project\Calculator\OperationsLibrary\obj\Debug\OperationsLibrar
 E:\Visual Studio\Project\Calculator\OperationsLibrary\obj\Debug\OperationsLibrary.csproj.CopyComplete
 E:\Visual Studio\Project\Calculator\OperationsLibrary\obj\Debug\OperationsLibrary.dll
 E:\Visual Studio\Project\Calculator\OperationsLibrary\obj\Debug\OperationsLibrary.pdb
+E:\Visual Studio\Project\Calculator\OperationsLibrary\bin\Debug\Newtonsoft.Json.dll
+E:\Visual Studio\Project\Calculator\OperationsLibrary\bin\Debug\Newtonsoft.Json.xml

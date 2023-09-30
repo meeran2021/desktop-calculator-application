@@ -60,3 +60,5 @@ E:\Visual Studio\Project\Calculator\Calculator\obj\Debug\Calculator.csproj.CoreC
 E:\Visual Studio\Project\Calculator\Calculator\obj\Debug\Calculator.csproj.CopyComplete
 E:\Visual Studio\Project\Calculator\Calculator\obj\Debug\Calculator.exe
 E:\Visual Studio\Project\Calculator\Calculator\obj\Debug\Calculator.pdb
+E:\Visual Studio\Project\Calculator\Calculator\bin\Debug\Newtonsoft.Json.dll
+E:\Visual Studio\Project\Calculator\Calculator\bin\Debug\Newtonsoft.Json.xml

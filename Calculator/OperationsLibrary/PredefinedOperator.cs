@@ -37,7 +37,7 @@ namespace OperationsLibrary
 
         public int GetOperatorPrecedence(string operatorSymbol)
         {
-            return GetOperatorClass(operatorSymbol).OperatorPrecedence;
+            return GetOperatorClass(operatorSymbol) != null ? GetOperatorClass(operatorSymbol).OperatorPrecedence : throw new InvalidOperationException($"Operator '{operatorSymbol}' not found.");
         }
     }
 }

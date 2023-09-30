@@ -9,25 +9,7 @@ namespace OperationsLibrary
 {
     public class SquareRoot : UnaryOperation
     {
-        private int _operatorPrecedence = 3;
-        
-        public new int OperatorPrecedence
-        {
-            get
-            {
-                return this._operatorPrecedence;
-            }
-            set
-            {
-                if (value <= 0)
-                {
-                    ResourceManager RmInstance = new ResourceManager("Resources", typeof(SquareRoot).Assembly);
-                    throw new ArgumentOutOfRangeException("value", RmInstance.GetString("precedenceValueException"));
-                }
-                else
-                    this._operatorPrecedence = value;
-            }
-        }
+        public override int OperatorPrecedence => 3;
 
         protected override double EvaluateUnary(double operand)
         {
