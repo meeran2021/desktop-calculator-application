@@ -27,17 +27,18 @@ namespace Calculator
 
             Parser ParserInstance = new Parser();
 
-            List<Token> ExpressionToken = ParserInstance.Tokenize("3+4*(2-1) + Sin ( 30 )");
+            List<Token> ExpressionToken = ParserInstance.Tokenize("3+4*(2-1)+7/3*4");
             Console.WriteLine("Length of ExpressionToken: " + ExpressionToken.Count);
 
             List<Token> PostfixExpression = ParserInstance.ConvertToPostfix(ExpressionToken);
             Console.WriteLine("Length of Postfix Expression: " + PostfixExpression.Count);
-
-            //foreach (Token TokenUnit in ExpressionToken)
-            //{
-            //    Console.WriteLine("Token: " + TokenUnit.ToString());
-            //}
             //Console.ReadLine();
+
+            foreach (Token TokenUnit in ExpressionToken)
+            {
+                Console.WriteLine("Token: " + TokenUnit.ToString());
+            }
+            Console.ReadLine();
 
 
 

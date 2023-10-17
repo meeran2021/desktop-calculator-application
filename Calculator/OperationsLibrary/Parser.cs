@@ -6,15 +6,58 @@ using System.Linq;
 using System.Resources;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Contexts;
-using System.Text.Json;
+//using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace OperationsLibrary
 {
     public class Parser : PredefinedOperator
     {
-        public List<OperatorItem> OperatorList;// = new List<Operator>();
+        public List<OperatorItem> OperatorList; 
         public List<Token> TokenList = new List<Token>();
+
+
+        public Parser()
+        {
+            InitializeOperatorDictionary();
+        }
+
+        // Method to load and initialize operators from JSON
+        private void InitializeOperatorDictionary()
+        {
+            string jsonPath = "E:\\Visual Studio\\Project\\Calculator\\OperationsLibrary\\OperatorDatabase.json";
+
+            try
+            {
+                string jsonText = File.ReadAllText(jsonPath);
+                var jsonObject = JsonConvert.DeserializeObject<JsonObject>(jsonText);
+
+                if (jsonObject.Operator != null)
+                {
+                    var operators = jsonObject.Operator;
+
+                    foreach (var operatorItem in operators)
+                    {
+                        IOperations operatorInstance = Activator.CreateInstance(Type.GetType(operatorItem.ClassName)) as IOperations;
+                        AddNewOperator(operatorItem.Symbol, operatorInstance);
+                    }
+                }
+            }
+            catch (FileNotFoundException ex)
+            {
+                Console.WriteLine($"Error: JSON file not found - {ex.Message}");
+            }
+            catch (JsonException ex)
+            {
+                Console.WriteLine($"Error: JSON parsing error - {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: An unexpected error occurred - {ex.Message}");
+            }
+        }
+
+
 
 
         public bool IsOperatorPrecedenceHigher(string operator1, string operator2)
@@ -23,48 +66,10 @@ namespace OperationsLibrary
         }
 
 
-        public void DeserializeOperatorJson(string jsonText)
-        {
-            // Parse the JSON document
-            JsonDocument ParsedJsonDocument = JsonDocument.Parse(jsonText);
-
-            // Get the root element
-            JsonElement Root = ParsedJsonDocument.RootElement;
-
-            // Extract the "Operator" array from the JSON data
-            JsonElement OperatorArray = Root.GetProperty("Operator");
-
-            // Create a list of Operator objects
-            //List<Operator>;
-            OperatorList = new List<OperatorItem>();
-
-            foreach (JsonElement OperatorItem in OperatorArray.EnumerateArray())
-            {
-                OperatorList.Add(new OperatorItem
-                {
-                    Symbol = OperatorItem.GetProperty("Symbol").GetString(),
-                    Name = OperatorItem.GetProperty("Name").GetString(),
-                    Precedence = OperatorItem.GetProperty("Precedence").GetString()
-                });
-            }
-
-            //return OperatorList;
-        }
-
-
         public List<Token> Tokenize(string expression)
         {
             string Path = "E:\\Visual Studio\\Project\\Calculator\\OperationsLibrary\\OperatorDatabase.json";
             string JsonText = File.ReadAllText(Path);
-
-
-            //List<Operator>;
-            //OperatorList = 
-            //DeserializeOperatorJson(JsonText);
-            //List<Operator>
-            //OperatorList = JsonSerializer.Deserialize<List<Operator>>(JsonText);
-
-            //OperatorList = JsonConvert.DeserializeObject<List<OperatorItem>>(JsonText);
 
             JsonObject root = JsonConvert.DeserializeObject<JsonObject>(JsonText);
 
@@ -72,8 +77,6 @@ namespace OperationsLibrary
             Dictionary<string, OperatorItem> OperatorDictionary = root.Operator.ToDictionary(
                 OperatorInstance => OperatorInstance.Symbol, 
                 OperatorInstance => OperatorInstance);
-
-            //List<Token> TokenList = new List<Token>();
 
 
             int LengthOfExpression = expression.Length;
@@ -95,18 +98,10 @@ namespace OperationsLibrary
                     TokenList.Add(new Token(TokenType.Operator, Token));
                 }
 
-                //else if(_parsingTable.Any(entry => entry.Key == ExpressionCurrentChar.ToString() && 
-                //        entry.Value == TokenType.Operator)) 
                 else if(OperatorDictionary.ContainsKey(ExpressionCurrentChar.ToString()) )
                 {
                     Token = ExpressionCurrentChar.ToString();
                     TokenList.Add(new Token(TokenType.Operator, Token));
-                    //Operator FetchedOperator = OperatorDictionary[ExpressionCurrentChar.ToString()];
-                    //if(FetchedOperator.Symbol == TokenType.Operator.ToString())
-                    //{
-                    //    Token = ExpressionCurrentChar.ToString();
-                    //    TokenList.Add(new Token(TokenType.Operator, Token));
-                    //}
                 }
 
                 //For Numbers Including Multiple Digits

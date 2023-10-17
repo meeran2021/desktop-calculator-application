@@ -9,7 +9,7 @@ namespace NewUnitTestProject
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestTokenize()
         {
             //Arrange
             Parser ParserInstance = new Parser();
@@ -17,7 +17,8 @@ namespace NewUnitTestProject
             //string JsonText = File.ReadAllText(Path);
 
             // Act
-            List<Token> ExpressionToken = ParserInstance.Tokenize("3+4*(2-1) + Sin ( 30 )");
+            List<Token> ExpressionToken = ParserInstance.Tokenize("3+4*(2-1) +4-5/6");
+            //List<Token> ExpressionToken = ParserInstance.Tokenize("3+4*(2-1) + Sin ( 30 )");
             //List<Token> ExpressionToken = ParserInstance.Tokenize("3+4");
 
             // Assert
@@ -43,7 +44,7 @@ namespace NewUnitTestProject
 
             List<Token> PostfixTokens = ParserInstance.ConvertToPostfix(InfixTokens);
 
-            Assert.AreEqual(9, PostfixTokens.Count);
+            Assert.AreEqual(7, PostfixTokens.Count);
             Assert.AreEqual("3", PostfixTokens[0].Value);
             Assert.AreEqual("4", PostfixTokens[1].Value);
             Assert.AreEqual("2", PostfixTokens[2].Value);
@@ -51,8 +52,6 @@ namespace NewUnitTestProject
             Assert.AreEqual("-", PostfixTokens[4].Value);
             Assert.AreEqual("*", PostfixTokens[5].Value);
             Assert.AreEqual("+", PostfixTokens[6].Value);
-            Assert.AreEqual("(", PostfixTokens[7].Value);
-            Assert.AreEqual(")", PostfixTokens[8].Value);
         }
 
     }
