@@ -193,5 +193,67 @@ namespace OperationsLibrary
 
             return PostfixTokens;
         }
+
+
+        public double EvaluatePostfix(List<Token> postfixTokens)
+        {
+            Stack<double> operandStack = new Stack<double>();
+
+            foreach (Token token in postfixTokens)
+            {
+                if (token.Type == TokenType.Operand)
+                {
+                    operandStack.Push(double.Parse(token.Value));
+                }
+                else if (token.Type == TokenType.Operator)
+                {
+                    //if (OperatorDictionary.TryGetValue(token.Value, out OperatorItem operatorItem))
+                    IOperations operatorClass = GetOperatorClass(token.Value);
+                    int operandCount = operatorClass.OperandCount;
+                    double[] operands = new double[operandCount];
+                    for (int operandIndex = operandCount - 1; operandIndex >= 0; operandIndex--)
+                    {
+                        operands[operandIndex] = operandStack.Pop();
+                    }
+                    double result = operatorClass.Evaluate(operands);
+                    operandStack.Push(result);
+                }
+                //{
+                //    IOperations operatorInstance = GetOperatorClass(operatorItem.Symbol);
+
+                //    if (operatorInstance is BinaryOperation binaryOperator)
+                //    {
+                //        double operand2 = operandStack.Pop();
+                //        double operand1 = operandStack.Pop();
+                //        double result = binaryOperator.EvaluateBinary(operand1, operand2);
+                //        operandStack.Push(result);
+                //    }
+                //    else if (operatorInstance is UnaryOperation unaryOperator)
+                //    {
+                //        double operand = operandStack.Pop();
+                //        double result = unaryOperator.EvaluateUnary(operand);
+                //        operandStack.Push(result);
+                //    }
+                //    // Add additional cases for other types of operators as needed
+                //}
+                else
+                {
+                    throw new InvalidOperationException("Operator not found in the dictionary");
+                }
+                
+            }
+
+            if (operandStack.Count == 1)
+            {
+                return operandStack.Peek();
+            }
+            else
+            {
+                throw new InvalidOperationException("Invalid postfix expression");
+            }
+        }
+
+
+
     }
 }

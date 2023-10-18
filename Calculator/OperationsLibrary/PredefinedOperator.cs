@@ -8,32 +8,33 @@ namespace OperationsLibrary
 {
     public class PredefinedOperator 
     {
-        private Dictionary<string, IOperations> _operatorDictionary = new Dictionary<string, IOperations>();
+        protected Dictionary<string, IOperations> OperatorDictionary = new Dictionary<string, IOperations>();
 
         public int AddNewOperator(string operatorSymbol, IOperations operatorName)
         {
-            if (_operatorDictionary.ContainsKey(operatorSymbol))
+            if (OperatorDictionary.ContainsKey(operatorSymbol))
             {
                 return 0;
             }
             else
             {
-                _operatorDictionary.Add(operatorSymbol, operatorName);
+                OperatorDictionary.Add(operatorSymbol, operatorName);
                 return 1;
             }
         }
 
         public IOperations GetOperatorClass(string operatorSymbol)
         {
-            if (_operatorDictionary.ContainsKey(operatorSymbol))
+            if (OperatorDictionary.ContainsKey(operatorSymbol))
             {
-                return _operatorDictionary[operatorSymbol];
+                return OperatorDictionary[operatorSymbol];
             }
             else
             {
-                return null;
+                throw new InvalidOperationException($"Operator '{operatorSymbol}' not found.");
             }
         }
+
 
         public int GetOperatorPrecedence(string operatorSymbol)
         {

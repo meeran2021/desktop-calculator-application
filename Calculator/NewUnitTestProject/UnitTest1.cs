@@ -23,7 +23,7 @@ namespace NewUnitTestProject
 
             // Assert
             //Assert.AreEqual(14, JsonText.Length);
-            Assert.AreEqual(14, ExpressionToken.Count);
+            Assert.AreEqual(15, ExpressionToken.Count);
             Assert.AreEqual("3", ExpressionToken[0].Value);
             Assert.AreEqual("+", ExpressionToken[1].Value);
             Assert.AreEqual("4", ExpressionToken[2].Value);
@@ -33,6 +33,12 @@ namespace NewUnitTestProject
             Assert.AreEqual("-", ExpressionToken[6].Value);
             Assert.AreEqual("1", ExpressionToken[7].Value);
             Assert.AreEqual(")", ExpressionToken[8].Value);
+            Assert.AreEqual("+", ExpressionToken[9].Value);
+            Assert.AreEqual("4", ExpressionToken[10].Value);
+            Assert.AreEqual("-", ExpressionToken[11].Value);
+            Assert.AreEqual("5", ExpressionToken[12].Value);
+            Assert.AreEqual("/", ExpressionToken[13].Value);
+            Assert.AreEqual("6", ExpressionToken[14].Value);
         }
 
 
@@ -52,6 +58,19 @@ namespace NewUnitTestProject
             Assert.AreEqual("-", PostfixTokens[4].Value);
             Assert.AreEqual("*", PostfixTokens[5].Value);
             Assert.AreEqual("+", PostfixTokens[6].Value);
+        }
+
+        [TestMethod]
+        public void TestEvaluatePostfix()
+        {
+            Parser ParserInstance = new Parser();
+            List<Token> InfixTokens = ParserInstance.Tokenize("3 + 4 / 5"); // "3 + 4 / 5*(4*12)/3"
+
+            List<Token> PostfixTokens = ParserInstance.ConvertToPostfix(InfixTokens);
+
+            double result = ParserInstance.EvaluatePostfix(PostfixTokens);
+
+            Assert.AreEqual(3.8, result);
         }
 
     }
