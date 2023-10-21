@@ -109,10 +109,14 @@ namespace OperationsLibrary
                 // Handle decimal numbers required
                 else if (char.IsDigit(ExpressionCurrentChar))
                 {
-                    while (ExpresionIndex < LengthOfExpression && char.IsDigit(expression[ExpresionIndex]))
+                    int CounterDecimal = 0;
+                    while (ExpresionIndex < LengthOfExpression)
                     {
-                        Token += expression[ExpresionIndex];
-                        ExpresionIndex++;
+                        if(char.IsDigit(expression[ExpresionIndex]) || (expression[ExpresionIndex] == '.' && CounterDecimal++ == 0))
+                        {
+                            Token += expression[ExpresionIndex];
+                            ExpresionIndex++;
+                        }
                     }
                     ExpresionIndex--;
                     TokenList.Add(new Token(TokenType.Operand, Token));
