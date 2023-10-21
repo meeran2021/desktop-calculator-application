@@ -20,28 +20,14 @@ namespace Calculator
             Application.Run(new Form1());
 
 
+            //Parser ParserInstance = new Parser();
 
-            //Console.WriteLine("Testing Message");
-            //OperationsLibrary.Evaluator evaluate = new OperationsLibrary.Evaluator();
-            //Console.WriteLine(evaluate.Solve("2+3+4+5"));
+            //List<Token> ExpressionToken = ParserInstance.Tokenize("3+4*(2-1)+7/3*4");
+            //Console.WriteLine("Length of ExpressionToken: " + ExpressionToken.Count);
 
-            Parser ParserInstance = new Parser();
-
-            List<Token> ExpressionToken = ParserInstance.Tokenize("3+4*(2-1)+7/3*4");
-            Console.WriteLine("Length of ExpressionToken: " + ExpressionToken.Count);
-
-            List<Token> PostfixExpression = ParserInstance.ConvertToPostfix(ExpressionToken);
-            Console.WriteLine("Length of Postfix Expression: " + PostfixExpression.Count);
-            //Console.ReadLine();
-
-            foreach (Token TokenUnit in ExpressionToken)
-            {
-                Console.WriteLine("Token: " + TokenUnit.ToString());
-            }
-            Console.ReadLine();
-
-
-
+            //List<Token> PostfixExpression = ParserInstance.ConvertToPostfix(ExpressionToken);
+            //Console.WriteLine("Length of Postfix Expression: " + PostfixExpression.Count);
+                        
             //Console.ReadLine();
 
         }
