@@ -1,4 +1,3 @@
-```markdown
 # Calculator Desktop App
 
 ## Overview
@@ -7,12 +6,12 @@ This desktop application is a versatile calculator developed in .NET using C#. I
 
 ## Table of Contents
 
-- (#project-structure)
-- (#getting-started)
-- (#features)
-- (#configuration)
-- (#contributing)
-- (#license)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Features](#features)
+- [Configuration](#configuration)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Project Structure
 
@@ -71,4 +70,3 @@ Feel free to contribute by opening issues, providing feedback, or submitting pul
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-```
