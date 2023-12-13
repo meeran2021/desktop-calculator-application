@@ -49,7 +49,7 @@
             this.btnSquare = new System.Windows.Forms.Button();
             this.btnSquareRoot = new System.Windows.Forms.Button();
             this.btnDivide = new System.Windows.Forms.Button();
-            this.btmPercentage = new System.Windows.Forms.Button();
+            this.btnPercentage = new System.Windows.Forms.Button();
             this.btnClearEntry = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnBackspace = new System.Windows.Forms.Button();
@@ -323,16 +323,16 @@
             // 
             // btmPercentage
             // 
-            this.btmPercentage.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.btmPercentage.Font = new System.Drawing.Font("Microsoft JhengHei UI", 13.8F, System.Drawing.FontStyle.Bold);
-            this.btmPercentage.Location = new System.Drawing.Point(9, 111);
-            this.btmPercentage.Margin = new System.Windows.Forms.Padding(2);
-            this.btmPercentage.Name = "btmPercentage";
-            this.btmPercentage.Size = new System.Drawing.Size(70, 46);
-            this.btmPercentage.TabIndex = 24;
-            this.btmPercentage.Text = "%";
-            this.btmPercentage.UseVisualStyleBackColor = false;
-            this.btmPercentage.Click += new System.EventHandler(this.btmPercentage_Click);
+            this.btnPercentage.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.btnPercentage.Font = new System.Drawing.Font("Microsoft JhengHei UI", 13.8F, System.Drawing.FontStyle.Bold);
+            this.btnPercentage.Location = new System.Drawing.Point(9, 111);
+            this.btnPercentage.Margin = new System.Windows.Forms.Padding(2);
+            this.btnPercentage.Name = "btmPercentage";
+            this.btnPercentage.Size = new System.Drawing.Size(70, 46);
+            this.btnPercentage.TabIndex = 24;
+            this.btnPercentage.Text = "%";
+            this.btnPercentage.UseVisualStyleBackColor = false;
+            this.btnPercentage.Click += new System.EventHandler(this.btmPercentage_Click);
             // 
             // btnClearEntry
             // 
@@ -394,7 +394,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(304, 421);
             this.Controls.Add(this.TextExpressionBox);
-            this.Controls.Add(this.btmPercentage);
+            this.Controls.Add(this.btnPercentage);
             this.Controls.Add(this.btnClearEntry);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnBackspace);
@@ -430,7 +430,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox TextResultBox;
         private System.Windows.Forms.Button btnEqualsto;
         private System.Windows.Forms.Button btnDecimal;
         private System.Windows.Forms.Button btnZero;
@@ -451,10 +450,11 @@
         private System.Windows.Forms.Button btnSquare;
         private System.Windows.Forms.Button btnSquareRoot;
         private System.Windows.Forms.Button btnDivide;
-        private System.Windows.Forms.Button btmPercentage;
+        private System.Windows.Forms.Button btnPercentage;
         private System.Windows.Forms.Button btnClearEntry;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnBackspace;
+        private System.Windows.Forms.TextBox TextResultBox;
         private System.Windows.Forms.TextBox TextExpressionBox;
     }
 }

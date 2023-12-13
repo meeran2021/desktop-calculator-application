@@ -13,6 +13,7 @@ namespace Calculator
 {
     public partial class Form1 : Form
     {
+        private bool digitHasDecimal = false;
         public Form1()
         {
             InitializeComponent();
@@ -34,21 +35,33 @@ namespace Calculator
         }
         private void btnDecimal_Click(object sender, EventArgs e)
         {
-            TextExpressionBox.Text += ".";
+            
+            if(!digitHasDecimal)
+            {
+                TextExpressionBox.Text += ".";
+                digitHasDecimal = true;
+            }
         }
 
         private void btnEqualsto_Click(object sender, EventArgs e)
         {
             string Expression = TextExpressionBox.Text;
+            Console.WriteLine(Expression);  //Testing
+
             if (Expression != "")
             {
                 Parser ParserInstance = new Parser();
 
                 List<Token> ExpressionToken = ParserInstance.Tokenize(Expression);
+                Console.WriteLine(ExpressionToken);  //Testing
                 List<Token> PostfixExpression = ParserInstance.ConvertToPostfix(ExpressionToken);
+                Console.WriteLine(PostfixExpression);  //Testing
                 double result = ParserInstance.EvaluatePostfix(PostfixExpression);
+                Console.WriteLine(result);  //Testing
 
                 TextResultBox.Text = result.ToString();
+                //Console.WriteLine(Expression);  //Testing
+
             }
         }
 
@@ -100,7 +113,7 @@ namespace Calculator
             TextExpressionBox.Text += "9";
         }
 
-
+        // Change the sign of current value/expression
         private void btnChangeSign_Click(object sender, EventArgs e)
         {
             string expression = TextExpressionBox.Text;
@@ -113,41 +126,49 @@ namespace Calculator
         private void btnAdd_Click(object sender, EventArgs e)
         {
             TextExpressionBox.Text += "+";
+            digitHasDecimal = false;
         }
 
         private void btnSubtract_Click(object sender, EventArgs e)
         {
             TextExpressionBox.Text += "-";
+            digitHasDecimal = false;
         }
 
         private void btnMultiply_Click(object sender, EventArgs e)
         {
             TextExpressionBox.Text += "*";
+            digitHasDecimal = false;
         }
 
         private void btnDivide_Click(object sender, EventArgs e)
         {
             TextExpressionBox.Text += "/";
+            digitHasDecimal = false;
         }
 
         private void btnSquareRoot_Click(object sender, EventArgs e)
         {
-
+            TextExpressionBox.Text = "Sqrt" + TextExpressionBox.Text;
+            btnEqualsto_Click(sender, e);
         }
 
         private void btnSquare_Click(object sender, EventArgs e)
         {
-
+            TextExpressionBox.Text = TextExpressionBox.Text + "*" + TextExpressionBox.Text;
+            btnEqualsto_Click(sender, e);
         }
 
         private void btnReceprocal_Click(object sender, EventArgs e)
         {
-
+            TextExpressionBox.Text = "1/" + TextExpressionBox.Text;
+            btnEqualsto_Click(sender, e);
         }
 
         private void btmPercentage_Click(object sender, EventArgs e)
         {
             TextExpressionBox.Text += "%";
+            digitHasDecimal = false;
         }
 
         private void btnClearEntry_Click(object sender, EventArgs e)
@@ -163,7 +184,7 @@ namespace Calculator
 
         private void btnBackspace_Click(object sender, EventArgs e)
         {
-            TextExpressionBox.Text.Remove(TextExpressionBox.Text.Length - 1);
+            TextExpressionBox.Text = TextExpressionBox.Text.Remove(TextExpressionBox.Text.Length - 1);
         }
     }
 }

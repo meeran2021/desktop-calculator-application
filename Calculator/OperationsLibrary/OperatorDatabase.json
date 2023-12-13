@@ -40,7 +40,7 @@
     },
     {
       "ClassName": "OperationsLibrary.Reciprocal",
-      "Symbol": "~",
+      "Symbol": "1/",
       "Name": "Reciprocal",
       "Precedence": "2"
     },

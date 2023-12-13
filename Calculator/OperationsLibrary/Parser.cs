@@ -60,7 +60,6 @@ namespace OperationsLibrary
 
 
 
-
         public bool IsOperatorPrecedenceHigher(string operator1, string operator2)
         {
             return GetOperatorPrecedence(operator1) > GetOperatorPrecedence(operator2);
@@ -87,7 +86,7 @@ namespace OperationsLibrary
                 string Token = string.Empty;
                 char ExpressionCurrentChar = expression[ExpresionIndex];
 
-                // For Functions like Sin, Cos, etc
+                // For Functions like Sqrt, Sin, Cos, etc
                 if (char.IsLetter(ExpressionCurrentChar))
                 {
                     while (ExpresionIndex < LengthOfExpression && char.IsLetter(expression[ExpresionIndex]))
@@ -106,17 +105,17 @@ namespace OperationsLibrary
                 }
 
                 //For Numbers Including Multiple Digits
-                // Handle decimal numbers required
                 else if (char.IsDigit(ExpressionCurrentChar))
                 {
                     int CounterDecimal = 0;
                     while (ExpresionIndex < LengthOfExpression)
                     {
-                        if(char.IsDigit(expression[ExpresionIndex]) || (expression[ExpresionIndex] == '.' && CounterDecimal++ == 0))
+                        if (char.IsDigit(expression[ExpresionIndex]) || (expression[ExpresionIndex] == '.' && CounterDecimal++ == 0))
                         {
                             Token += expression[ExpresionIndex];
                             ExpresionIndex++;
                         }
+                        else break;
                     }
                     ExpresionIndex--;
                     TokenList.Add(new Token(TokenType.Operand, Token));
@@ -135,8 +134,8 @@ namespace OperationsLibrary
 
                 else
                 {
-                    Console.WriteLine("Inside Else Condiion");  //Testing
-                    //throw new Exception("Undefined Token");
+                    //Console.WriteLine("Inside Else Condiion");  //Testing
+                    throw new Exception("Undefined Token");
                 }
             }
 
