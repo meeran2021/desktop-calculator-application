@@ -118,27 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="EmptyExpression" xml:space="preserve">
-    <value>Expression Not Found Error</value>
+    <value>Expression introuvable.</value>
   </data>
   <data name="InvalidOperandType" xml:space="preserve">
-    <value>Invalid Operand Type</value>
+    <value>Type d'opérande non valide.</value>
   </data>
   <data name="InvalidOperatorException" xml:space="preserve">
-    <value>Operator Is Not Defined</value>
+    <value>Opérateur non défini</value>
   </data>
   <data name="MismatchedParentheses" xml:space="preserve">
-    <value>Mismatched parentheses in expression. Insert a valid expression</value>
+    <value>Parenthèses désaccordées dans l'expression. Insérez une expression valide.</value>
   </data>
   <data name="NotEnoughOperandsInStackToPerformOperation" xml:space="preserve">
-    <value>Not Enough Operands In Stack To Perform Operation</value>
+    <value>Pas assez d'opérandes dans la pile pour effectuer l'opération.</value>
   </data>
   <data name="OperandException" xml:space="preserve">
-    <value>Binary operator must contain two operands only.</value>
+    <value>L'opérateur binaire doit contenir deux opérandes seulement.</value>
   </data>
   <data name="OperatorClassNotFoundException" xml:space="preserve">
-    <value>Operator Class Not Found Exception</value>
+    <value>Classe d'opérateur introuvable.</value>
   </data>
   <data name="PrecedenceValueException" xml:space="preserve">
-    <value>Invalid Opertor Precedence. Value must be greater than 0.</value>
+    <value>Précédence de l'opérateur non valide. La valeur doit être supérieure à 0.</value>
   </data>
 </root>

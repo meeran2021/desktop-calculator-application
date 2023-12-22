@@ -64,6 +64,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -79,6 +80,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OperationLibraryExceptions.resx</DependentUpon>
+    </Compile>
+    <Compile Include="OperationLibraryExceptions.fr-FR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OperationLibraryExceptions.fr-FR.resx</DependentUpon>
     </Compile>
     <Compile Include="PredefinedOperator.cs" />
     <Compile Include="OperatorItem.cs" />
@@ -97,6 +103,11 @@
     <Compile Include="UnaryOperation.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="OperationLibraryExceptions.fr-FR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OperationLibraryExceptions.fr-FR.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>OperationsLibrary</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="OperationLibraryExceptions.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>OperationLibraryExceptions.Designer.cs</LastGenOutput>

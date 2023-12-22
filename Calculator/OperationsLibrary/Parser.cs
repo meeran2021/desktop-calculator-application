@@ -8,6 +8,8 @@ using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Contexts;
 //using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Windows.Forms;
+
 
 namespace OperationsLibrary
 {
@@ -15,7 +17,7 @@ namespace OperationsLibrary
     {
         public List<OperatorItem> OperatorList; 
         public List<Token> TokenList = new List<Token>();
-
+         
 
         public Parser()
         {
@@ -58,7 +60,10 @@ namespace OperationsLibrary
             }
         }
 
-
+        private void ShowErrorPopup(string errorMessage)
+        {
+            MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
         public bool IsOperatorPrecedenceHigher(string operator1, string operator2)
         {
@@ -134,8 +139,18 @@ namespace OperationsLibrary
 
                 else
                 {
-                    //Console.WriteLine("Inside Else Condiion");  //Testing
-                    throw new Exception("Undefined Token");
+                    try
+                    {
+                        //Console.WriteLine("Inside Else Condiion");  //Testing
+                        throw new Exception(OperationLibraryExceptions.InvalidOperatorException);
+
+                    }
+
+                    catch (Exception Ex)
+                    {
+                        ShowErrorPopup(Ex.Message);
+                    
+                    }
                 }
             }
 
@@ -146,12 +161,26 @@ namespace OperationsLibrary
         {
             List<Token> PostfixTokens = new List<Token>();
             Stack<Token> OperatorStack = new Stack<Token>();
-
+            int LastTokenWas = 0;
             foreach (Token TokenUnit in infixTokens)
             {
                 if (TokenUnit.Type == TokenType.Operand)
                 {
-                    PostfixTokens.Add(TokenUnit); 
+                    try
+                    {
+                        if (LastTokenWas != 1)
+                            PostfixTokens.Add(TokenUnit);
+                        else
+                        {
+                            throw new Exception(OperationLibraryExceptions.InvalidOperatorException);
+                        }
+                    }
+                    catch (Exception Ex)
+                    {
+                        ShowErrorPopup(Ex.Message);
+                    }
+
+                    LastTokenWas = 1;
                 }
 
                 else if (TokenUnit.Type == TokenType.Operator)
@@ -163,8 +192,9 @@ namespace OperationsLibrary
                         PostfixTokens.Add(OperatorStack.Pop()); 
                     }
                     OperatorStack.Push(TokenUnit);
+                    LastTokenWas = 2;
                 }
-
+                // currently not in use
                 else if (TokenUnit.Type == TokenType.Delimiter)
                 {
                     if (TokenUnit.Value == "(")
@@ -187,6 +217,7 @@ namespace OperationsLibrary
                             throw new ArgumentException(RmInstance.GetString("MismatchedParentheses"));
                         }
                     }
+                    LastTokenWas = 3;
                 }
             }
 
@@ -202,50 +233,52 @@ namespace OperationsLibrary
         public double EvaluatePostfix(List<Token> postfixTokens)
         {
             Stack<double> operandStack = new Stack<double>();
-
-            foreach (Token token in postfixTokens)
-            {
-                if (token.Type == TokenType.Operand)
+            
+                foreach (Token token in postfixTokens)
                 {
-                    operandStack.Push(double.Parse(token.Value));
-                }
-                else if (token.Type == TokenType.Operator)
-                {
-                    //if (OperatorDictionary.TryGetValue(token.Value, out OperatorItem operatorItem))
-                    IOperations operatorClass = GetOperatorClass(token.Value);
-                    int operandCount = operatorClass.OperandCount;
-                    double[] operands = new double[operandCount];
-                    for (int operandIndex = operandCount - 1; operandIndex >= 0; operandIndex--)
+                    if (token.Type == TokenType.Operand)
                     {
-                        operands[operandIndex] = operandStack.Pop();
+                        operandStack.Push(double.Parse(token.Value));
                     }
-                    double result = operatorClass.Evaluate(operands);
-                    operandStack.Push(result);
-                }
-                //{
-                //    IOperations operatorInstance = GetOperatorClass(operatorItem.Symbol);
+                    else if (token.Type == TokenType.Operator)
+                    {
+                        //if (OperatorDictionary.TryGetValue(token.Value, out OperatorItem operatorItem))
+                        IOperations operatorClass = GetOperatorClass(token.Value);
+                        int operandCount = operatorClass.OperandCount;
 
-                //    if (operatorInstance is BinaryOperation binaryOperator)
-                //    {
-                //        double operand2 = operandStack.Pop();
-                //        double operand1 = operandStack.Pop();
-                //        double result = binaryOperator.EvaluateBinary(operand1, operand2);
-                //        operandStack.Push(result);
-                //    }
-                //    else if (operatorInstance is UnaryOperation unaryOperator)
-                //    {
-                //        double operand = operandStack.Pop();
-                //        double result = unaryOperator.EvaluateUnary(operand);
-                //        operandStack.Push(result);
-                //    }
-                //    // Add additional cases for other types of operators as needed
-                //}
-                else
-                {
-                    throw new InvalidOperationException("Operator not found in the dictionary");
+                    try
+                    {
+                        if (operandCount <= operandStack.Count)
+                        {
+                            double[] operands = new double[operandCount];
+                            for (int operandIndex = operandCount - 1; operandIndex >= 0; operandIndex--)
+                            {
+                                operands[operandIndex] = operandStack.Pop();
+                            }
+                            double result = operatorClass.Evaluate(operands);
+                            operandStack.Push(result);
+                        }
+                        else
+                        {
+                            throw new Exception(OperationLibraryExceptions.NotEnoughOperandsInStackToPerformOperation);
+                        }
+
+                    }
+                    catch (Exception Ex)
+                    {
+                        ShowErrorPopup(Ex.Message);
+                        break;
+                    }
                 }
-                
-            }
+
+                    // Codeblock unreachable as input is taken from clicking the buttons displayed on calculator and no undefined button present there.
+                    //else
+                    //{
+                    //    throw new InvalidOperationException("Operator not found in the dictionary");
+                    //}
+
+                }
+
 
             if (operandStack.Count == 1)
             {
@@ -255,9 +288,17 @@ namespace OperationsLibrary
             {
                 throw new InvalidOperationException("Invalid postfix expression");
             }
+
         }
 
 
 
     }
 }
+
+
+
+//ToDos
+//Fix Exception  // Incomplete
+//Manage other exceotion with popups
+//Implement SOLID principles

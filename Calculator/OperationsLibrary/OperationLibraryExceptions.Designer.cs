@@ -79,6 +79,15 @@ namespace OperationsLibrary {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Operator Is Not Defined.
+        /// </summary>
+        internal static string InvalidOperatorException {
+            get {
+                return ResourceManager.GetString("InvalidOperatorException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mismatched parentheses in expression. Insert a valid expression.
         /// </summary>
         internal static string MismatchedParentheses {
