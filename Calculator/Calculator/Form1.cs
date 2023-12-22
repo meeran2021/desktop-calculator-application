@@ -231,7 +231,7 @@ namespace Calculator
 
         private void btnSquare_Click(object sender, EventArgs e)
         {
-            TextExpressionBox.Text = TextExpressionBox.Text + "*" + TextExpressionBox.Text;
+            TextExpressionBox.Text = "(" + TextExpressionBox.Text + ") * (" + TextExpressionBox.Text + ")";
             btnEqualsto_Click(sender, e);
         }
 

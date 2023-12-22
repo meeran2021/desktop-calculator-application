@@ -18,9 +18,9 @@ namespace Calculator
         static void Main()
         {
             // Set the culture to French (France)
-            CultureInfo culture = CultureInfo.GetCultureInfo("fr-FR");
-            Thread.CurrentThread.CurrentCulture = culture;
-            Thread.CurrentThread.CurrentUICulture = culture;
+            //CultureInfo culture = CultureInfo.GetCultureInfo("fr-FR");
+            //Thread.CurrentThread.CurrentCulture = culture;
+            //Thread.CurrentThread.CurrentUICulture = culture;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

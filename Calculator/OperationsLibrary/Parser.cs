@@ -214,7 +214,9 @@ namespace OperationsLibrary
                         else
                         {
                             ResourceManager RmInstance = new ResourceManager("Resources", typeof(Parser).Assembly);
-                            throw new ArgumentException(RmInstance.GetString("MismatchedParentheses"));
+                            Exception Ex = new ArgumentException(RmInstance.GetString("MismatchedParentheses"));
+                            ShowErrorPopup(Ex.Message);
+                            throw Ex;
                         }
                     }
                     LastTokenWas = 3;
@@ -234,17 +236,17 @@ namespace OperationsLibrary
         {
             Stack<double> operandStack = new Stack<double>();
             
-                foreach (Token token in postfixTokens)
+            foreach (Token token in postfixTokens)
                 {
-                    if (token.Type == TokenType.Operand)
-                    {
-                        operandStack.Push(double.Parse(token.Value));
-                    }
-                    else if (token.Type == TokenType.Operator)
-                    {
-                        //if (OperatorDictionary.TryGetValue(token.Value, out OperatorItem operatorItem))
-                        IOperations operatorClass = GetOperatorClass(token.Value);
-                        int operandCount = operatorClass.OperandCount;
+                if (token.Type == TokenType.Operand)
+                {
+                    operandStack.Push(double.Parse(token.Value));  // Parsing based on current culture -> Need fixing
+                }
+                else if (token.Type == TokenType.Operator)
+                {
+                    //if (OperatorDictionary.TryGetValue(token.Value, out OperatorItem operatorItem))
+                    IOperations operatorClass = GetOperatorClass(token.Value);
+                    int operandCount = operatorClass.OperandCount;
 
                     try
                     {
@@ -265,7 +267,7 @@ namespace OperationsLibrary
 
                     }
                     catch (Exception Ex)
-                    {
+                        {
                         ShowErrorPopup(Ex.Message);
                         break;
                     }
@@ -277,22 +279,20 @@ namespace OperationsLibrary
                     //    throw new InvalidOperationException("Operator not found in the dictionary");
                     //}
 
-                }
-
-
+            }
+ 
             if (operandStack.Count == 1)
             {
                 return operandStack.Peek();
             }
             else
             {
-                throw new InvalidOperationException("Invalid postfix expression");
+                Exception Ex = new InvalidOperationException("Invalid postfix expression");
+                ShowErrorPopup(Ex.Message);
+                throw Ex;
             }
-
+            
         }
-
-
-
     }
 }
 
