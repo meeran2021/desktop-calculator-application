@@ -8,6 +8,7 @@ This desktop application is a versatile calculator developed in .NET using C#. I
 
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
+- [Running the Application](#running-the-application)
 - [Features](#features)
 - [Configuration](#configuration)
 - [Contributing](#contributing)
@@ -51,6 +52,35 @@ This desktop application is a versatile calculator developed in .NET using C#. I
 
 3. **Build and Run:**
    - Build the solution and run the `CalculatorApp` project.
+
+## Running the Application
+
+Follow these steps to run the Calculator Desktop App:
+
+1. **Clone the Repository:**
+Open a terminal or command prompt and execute the following command to clone the repository to your local machine:
+ ```bash
+   git clone https://github.com/meeran2021/desktop-calculator-application.git
+   ```
+
+2. **Navigate to the Project Directory:**
+Change into the project directory:
+```bash
+  cd desktop-calculator-application\CalculatorApp
+  ```
+
+3. **Build and Run:**
+Build the solution and run the application using the following commands:
+```bash
+  dotnet build
+  dotnet run --project CalculatorApp
+  ```
+This will build the application and start it, allowing you to interact with the calculator.
+
+4. **Use the Calculator:**
+Once the application is running, you will get access to the calculator interface. Perform various arithmetic operations and explore the features provided by the calculator.
+
+Now you have the Calculator Desktop App up and running without opening the code in an editor. Enjoy using the calculator!
 
 ## Features
 
