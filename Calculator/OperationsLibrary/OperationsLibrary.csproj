@@ -86,7 +86,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OperationLibraryExceptions.fr-FR.resx</DependentUpon>
     </Compile>
-    <Compile Include="PredefinedOperator.cs" />
+    <Compile Include="PredefinedOperators.cs" />
     <Compile Include="OperatorItem.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Divide.cs" />

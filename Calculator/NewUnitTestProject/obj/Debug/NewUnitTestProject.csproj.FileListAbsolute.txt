@@ -22,3 +22,4 @@ E:\Visual Studio\Project\Calculator\NewUnitTestProject\obj\Debug\NewUnitTestProj
 E:\Visual Studio\Project\Calculator\NewUnitTestProject\bin\Debug\NewUnitTestProject.dll.config
 E:\Visual Studio\Project\Calculator\NewUnitTestProject\bin\Debug\Newtonsoft.Json.dll
 E:\Visual Studio\Project\Calculator\NewUnitTestProject\bin\Debug\Newtonsoft.Json.xml
+E:\Visual Studio\Project\Calculator\NewUnitTestProject\bin\Debug\fr-FR\OperationsLibrary.resources.dll

@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace OperationsLibrary
 {
-    public class Evaluator : PredefinedOperator
+    // This class is not in use currently
+    public class Evaluator : PredefinedOperators
     {
         //private string _expression;
 

@@ -13,9 +13,8 @@ using System.Windows.Forms;
 
 namespace OperationsLibrary
 {
-    public class Parser : PredefinedOperator
+    public class Parser : PredefinedOperators
     {
-        public List<OperatorItem> OperatorList; 
         public List<Token> TokenList = new List<Token>();
          
 
@@ -25,65 +24,8 @@ namespace OperationsLibrary
         }
 
 
-        // Method to load and initialize operators from JSON
-        private void InitializeOperatorDictionary()
-        {
-            string jsonPath = "E:\\Visual Studio\\Project\\Calculator\\OperationsLibrary\\OperatorDatabase.json";
-
-            try
-            {
-                string jsonText = File.ReadAllText(jsonPath);
-                var jsonObject = JsonConvert.DeserializeObject<JsonObject>(jsonText);
-
-                if (jsonObject.Operator != null)
-                {
-                    var operators = jsonObject.Operator;
-
-                    foreach (var operatorItem in operators)
-                    {
-                        IOperations operatorInstance = Activator.CreateInstance(Type.GetType(operatorItem.ClassName)) as IOperations;
-                        AddNewOperator(operatorItem.Symbol, operatorInstance);
-                    }
-                }
-            }
-            catch (FileNotFoundException ex)
-            {
-                Console.WriteLine($"Error: JSON file not found - {ex.Message}");
-            }
-            catch (JsonException ex)
-            {
-                Console.WriteLine($"Error: JSON parsing error - {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: An unexpected error occurred - {ex.Message}");
-            }
-        }
-
-        private void ShowErrorPopup(string errorMessage)
-        {
-            MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        public bool IsOperatorPrecedenceHigher(string operator1, string operator2)
-        {
-            return GetOperatorPrecedence(operator1) > GetOperatorPrecedence(operator2);
-        }
-
-
         public List<Token> Tokenize(string expression)
         {
-            string Path = "E:\\Visual Studio\\Project\\Calculator\\OperationsLibrary\\OperatorDatabase.json";
-            string JsonText = File.ReadAllText(Path);
-
-            JsonObject root = JsonConvert.DeserializeObject<JsonObject>(JsonText);
-
-
-            Dictionary<string, OperatorItem> OperatorDictionary = root.Operator.ToDictionary(
-                OperatorInstance => OperatorInstance.Symbol, 
-                OperatorInstance => OperatorInstance);
-
-
             int LengthOfExpression = expression.Length;
             
             for (int ExpresionIndex = 0; ExpresionIndex < LengthOfExpression; ExpresionIndex++)
@@ -148,8 +90,9 @@ namespace OperationsLibrary
 
                     catch (Exception Ex)
                     {
-                        ShowErrorPopup(Ex.Message);
-                    
+                        //ShowErrorPopup(Ex.Message);
+                        MessageBox.Show(Ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                     }
                 }
             }
@@ -177,7 +120,7 @@ namespace OperationsLibrary
                     }
                     catch (Exception Ex)
                     {
-                        ShowErrorPopup(Ex.Message);
+                        MessageBox.Show(Ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
                     LastTokenWas = 1;
@@ -215,7 +158,7 @@ namespace OperationsLibrary
                         {
                             ResourceManager RmInstance = new ResourceManager("Resources", typeof(Parser).Assembly);
                             Exception Ex = new ArgumentException(RmInstance.GetString("MismatchedParentheses"));
-                            ShowErrorPopup(Ex.Message);
+                            MessageBox.Show(Ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             throw Ex;
                         }
                     }
@@ -268,7 +211,7 @@ namespace OperationsLibrary
                     }
                     catch (Exception Ex)
                         {
-                        ShowErrorPopup(Ex.Message);
+                        MessageBox.Show(Ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     }
                 }
@@ -288,7 +231,7 @@ namespace OperationsLibrary
             else
             {
                 Exception Ex = new InvalidOperationException("Invalid postfix expression");
-                ShowErrorPopup(Ex.Message);
+                MessageBox.Show(Ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw Ex;
             }
             
@@ -297,8 +240,3 @@ namespace OperationsLibrary
 }
 
 
-
-//ToDos
-//Fix Exception  // Incomplete
-//Manage other exceotion with popups
-//Implement SOLID principles
