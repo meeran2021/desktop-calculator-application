@@ -44,5 +44,5 @@ E:\Visual Studio\Project\Calculator\Calculator\obj\Debug\Calculator.exe
 E:\Visual Studio\Project\Calculator\Calculator\obj\Debug\Calculator.pdb
 E:\Visual Studio\Project\Calculator\Calculator\bin\Debug\Newtonsoft.Json.dll
 E:\Visual Studio\Project\Calculator\Calculator\bin\Debug\Newtonsoft.Json.xml
-E:\Visual Studio\Project\Calculator\Calculator\obj\Debug\Calculator.Form1.resources
 E:\Visual Studio\Project\Calculator\Calculator\bin\Debug\fr-FR\OperationsLibrary.resources.dll
+E:\Visual Studio\Project\Calculator\Calculator\obj\Debug\Calculator.CalculatorForm.resources

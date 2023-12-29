@@ -12,7 +12,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Calculator
 {
-    public partial class Form1 : Form
+    public partial class CalculatorForm : Form
     {
         private bool digitHasDecimal = false;   // To avoid insertion of multiple decimals
 
@@ -29,13 +29,13 @@ namespace Calculator
         }
 
 
-        public Form1()
+        public CalculatorForm()
         {
             InitializeComponent();
         }
 
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void CalculatorForm_Load(object sender, EventArgs e)
         {
             TextExpressionBox.Select();
         }
@@ -139,8 +139,11 @@ namespace Calculator
                     List<Token> PostfixExpression = ParserInstance.ConvertToPostfix(ExpressionToken);
                     double result = ParserInstance.EvaluatePostfix(PostfixExpression);
 
-                    TextResultBox.Text = result.ToString();
 
+                    TextResultBox.Text = Expression;
+                    TextExpressionBox.Text = result.ToString();
+
+                    digitHasDecimal = false;
                 }
             }
         }
@@ -176,7 +179,11 @@ namespace Calculator
 
         private void btnSubtract_Click(object sender, EventArgs e)
         {
-            if (TextEndsWithOperandOrDelimeter())
+            if (TextExpressionBox.Text == string.Empty)
+            {
+                TextExpressionBox.Text += "0-";
+            }
+            else if(TextEndsWithOperandOrDelimeter())
             {
                 TextExpressionBox.Text += "-";
             }

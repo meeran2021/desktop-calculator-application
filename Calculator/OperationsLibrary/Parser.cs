@@ -45,7 +45,9 @@ namespace OperationsLibrary
                     TokenList.Add(new Token(TokenType.Operator, Token));
                 }
 
-                else if(OperatorDictionary.ContainsKey(ExpressionCurrentChar.ToString()) )
+                // Needs to handle negative numbers
+                else if(OperatorDictionary.ContainsKey(ExpressionCurrentChar.ToString()) == true )
+                    //&& ((ExpresionIndex != 0) && OperatorDictionary.ContainsKey(expression[ExpresionIndex].ToString()) == false))
                 {
                     Token = ExpressionCurrentChar.ToString();
                     TokenList.Add(new Token(TokenType.Operator, Token));
